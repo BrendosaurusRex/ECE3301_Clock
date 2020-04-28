@@ -1,17 +1,38 @@
+# import curses
+# import time
+#
+# print("intializing screen")
+# screen = curses.initscr()
+# curses.noecho()
+# curses.cbreak()
+#
+# time.sleep(10)
+#
+# curses.nocbreak(); screen.keypad(0); curses.echo()
+# curses.endwin()
+# print("screen closed")
+
+import RPi.GPIO as GPIO
+#import Adafruit_CharLCD
 import curses
-import time
+from subprocess import *
+from time import sleep, strftime, mktime
+from datetime import datetime
 
-<<<<<<< HEAD
-print("intializing screen")
-screen = curses.initscr()
-curses.noecho()
-curses.cbreak()
+lcd = Adafruit_CharLCD()
 
-time.sleep(10)
+lcd.begin(16,1)
 
-curses.nocbreak(); screen.keypad(0); curses.echo()
-curses.endwin()
-print("screen closed")
-=======
-printf ("test jarod")
->>>>>>> 7b632bfa707c91b357e2a7c95fb7a740d527d6ca
+#GPIO.setup(18, 0)
+#GPIO.output(18, 1)
+
+dti = mktime(datetime.now().timetuple())
+while 1:
+    ndti = mktime(datetime.now().timetuple())
+    if dti < ndti:
+        dti = ndti
+        lcd.clear()
+        lcd.message(datetime.now().strftime('%b %d  %H:%M:%S\n'))
+        sleep(0.95)
+    else:
+        sleep(0.01)
