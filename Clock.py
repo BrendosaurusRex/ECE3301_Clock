@@ -14,7 +14,7 @@ def main(stdscr):
         ndti = mktime(datetime.now().timetuple())
         if dti < ndti:
             dti = ndti
-            stdscr.addstr(datetime.now().strftime('%b %d  %H:%M:%S\n'))
+            stdscr.addstr(datetime.now().strftime('%b %d  %H:%M:%S\r'))
             stdscr.refresh()
             sleep(0.95)
         else:
