@@ -70,6 +70,30 @@ print("testing 2")
 #     sleep(10)
 #     break
 
+
+# ===============================================================
+#Jarod: Testing GPIO library
+# ===============================================================
+# this method is  is waiting for a rising edge from a button Press
+# try this Out
+# also reference this link: https://raspberrypihq.com/use-a-push-button-with-raspberry-pi-gpio/
+#to download the library, im note sure if your other attempts downloaded it the same way
+#if it works it can then be adjusted to fit our needs
+import RPi.GPIO as GPIO
+
+def button_callback(channel);
+	print("button was pushed")
+
+GPIO.setwarnings(false) # ignore warnings lol
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(10,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+
+GPIO.add_event_detect(10,GPIO.RISING,callback=button_callback)
+
+massage = input("press enter to quit\n\n")
+GPIO.cleanup();
+
+
 # ===============================================================
 # Testing Thermal Sensor code
 # Using: Raspberry_Pi_DS18B20_Temperature_Sensing/thermometer.py
@@ -94,11 +118,11 @@ def read_temp_raw():
      return lines
 
 # Attempts to read DS18B20 device file, if available
-	catdata = subprocess.Popen(['cat',device_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	out,err = catdata.communicate()
-	out_decode = out.decode('utf-8')
-	lines = out_decode.split('\n')
-	return lines
+	#catdata = subprocess.Popen(['cat',device_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	#out,err = catdata.communicate()
+	#out_decode = out.decode('utf-8')
+	#lines = out_decode.split('\n')
+	#return lines
 
 def read_temp():
     lines = read_temp_raw()
