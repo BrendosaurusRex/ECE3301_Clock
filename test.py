@@ -77,18 +77,21 @@ print("testing 2")
 
 import glob
 import time
-import subprocess
+import os
+
+os.system ('modprobe w1-gpio')
+os,system('modprobe w1-therm')
 
 base_dir = '/sys/bus/w1/devices/'
-device_folder = glob.glob(base_dir + '00-*')[0] # Should be "28*" as device directory but
+device_folder = glob.glob(base_dir + '28-*')[0] # Should be "28*" as device directory but
 device_file = device_folder + '/w1_slave'       # hardware is not interfacing properly
 
 def read_temp_raw():
     # If device_file magically appears and is consistent, then use this code block
-    # f = open(device_file, 'r')
-    # lines = f.readlines()
-    # f.close()
-    # return lines
+     f = open(device_file, 'r')
+     lines = f.readlines()
+     f.close()
+     return lines
 
 # Attempts to read DS18B20 device file, if available
 	catdata = subprocess.Popen(['cat',device_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -110,6 +113,6 @@ def read_temp():
         return temp_c, temp_f
 
 while True:
-    deg_c, deg_f = read_temp()
-    print("%4f degrees F\r")
+    #deg_c, deg_f = read_temp()
+    print(read_temp())
     time.sleep(1)
