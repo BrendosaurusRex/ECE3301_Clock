@@ -70,6 +70,30 @@ print("testing 2")
 #     sleep(10)
 #     break
 
+
+# ===============================================================
+# Jarod: Testing GPIO library
+# ===============================================================
+# this method is  is waiting for a rising edge from a button Press
+# try this Out
+# also reference this link: https://raspberrypihq.com/use-a-push-button-with-raspberry-pi-gpio/
+#to download the library, im note sure if your other attempts downloaded it the same way
+#if it works it can then be adjusted to fit our needs
+import RPi.GPIO as GPIO
+
+def button_callback(channel);
+	print("button was pushed")
+
+GPIO.setwarnings(false) # ignore warnings lol
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(10,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+
+GPIO.add_event_detect(10,GPIO.RISING,callback=button_callback)
+
+massage = input("press enter to quit\n\n")
+GPIO.cleanup()
+
+
 # ===============================================================
 # Testing Thermal Sensor code
 # Using: Raspberry_Pi_DS18B20_Temperature_Sensing/thermometer.py
@@ -77,25 +101,28 @@ print("testing 2")
 
 import glob
 import time
-import subprocess
+import os
+
+os.system ('modprobe w1-gpio')
+os.system('modprobe w1-therm')
 
 base_dir = '/sys/bus/w1/devices/'
-device_folder = glob.glob(base_dir + '00-*')[0] # Should be "28*" as device directory but
+device_folder = glob.glob(base_dir + '28-*')[0] # Should be "28*" as device directory but
 device_file = device_folder + '/w1_slave'       # hardware is not interfacing properly
 
 def read_temp_raw():
     # If device_file magically appears and is consistent, then use this code block
-    # f = open(device_file, 'r')
-    # lines = f.readlines()
-    # f.close()
-    # return lines
+     f = open(device_file, 'r')
+     lines = f.readlines()
+     f.close()
+     return lines
 
 # Attempts to read DS18B20 device file, if available
-	catdata = subprocess.Popen(['cat',device_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	out,err = catdata.communicate()
-	out_decode = out.decode('utf-8')
-	lines = out_decode.split('\n')
-	return lines
+	#catdata = subprocess.Popen(['cat',device_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	#out,err = catdata.communicate()
+	#out_decode = out.decode('utf-8')
+	#lines = out_decode.split('\n')
+	#return lines
 
 def read_temp():
     lines = read_temp_raw()
@@ -110,6 +137,39 @@ def read_temp():
         return temp_c, temp_f
 
 while True:
-    deg_c, deg_f = read_temp()
-    print("%4f degrees F\r")
+    #deg_c, deg_f = read_temp()
+    print(read_temp())
     time.sleep(1)
+# ===============================================================
+# Jarod: Testing clock GUI
+# ===============================================================
+from tkinter import *
+from tkinter.ttk import *
+
+# importing strftime function to
+# retrieve system's time
+from time import strftime
+
+# creating tkinter window
+root = Tk()
+root.title('Clock')
+
+# This function is used to
+# display time on the label
+def time():
+    string = strftime('%H:%M:%S %p')
+    lbl.config(text = string)
+    lbl.after(1000, time)
+
+# Styling the label widget so that clock
+
+lbl = Label(root, font = ('calibri', 40, 'bold'),
+            background = 'purple',
+            foreground = 'white')
+
+# Placing clock at the centre
+# of the tkinter window
+lbl.pack(anchor = 'center')
+time()
+
+mainloop()
