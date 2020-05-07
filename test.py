@@ -12,7 +12,7 @@ print("Jarod was also here")
 print("testing 2")
 
 # ===============================================================
-# Testing gpiozero library and Button module
+# Brendon: Testing gpiozero library and Button module
 # ===============================================================
 # from gpiozero import Button
 # from time import sleep
@@ -40,7 +40,7 @@ print("testing 2")
 # print("Out of loop")
 
 # ===============================================================
-# Testing GPIO library
+# Brendon: Testing GPIO library
 # ===============================================================
 
 # import RPi.GPIO as G
@@ -81,21 +81,21 @@ print("testing 2")
 #if it works it can then be adjusted to fit our needs
 import RPi.GPIO as GPIO
 
-def button_callback(channel);
+def button_callback(channel):
 	print("button was pushed")
 
-GPIO.setwarnings(false) # ignore warnings lol
+GPIO.setwarnings(False) # ignore warnings lol
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(10,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
 GPIO.add_event_detect(10,GPIO.RISING,callback=button_callback)
 
-massage = input("press enter to quit\n\n")
+message = input("press enter to quit\n\n")
 GPIO.cleanup()
 
 
 # ===============================================================
-# Testing Thermal Sensor code
+# Brendon: Testing Thermal Sensor code
 # Using: Raspberry_Pi_DS18B20_Temperature_Sensing/thermometer.py
 # ===============================================================
 
@@ -136,7 +136,7 @@ def read_temp():
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c, temp_f
 
-while True:
+# while True:
     #deg_c, deg_f = read_temp()
     print(read_temp())
     time.sleep(1)
