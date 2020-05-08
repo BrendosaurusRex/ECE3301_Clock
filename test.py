@@ -1,15 +1,15 @@
 
-import curses
-# from RPLCD import CharLCD
-
-# print("Successfully installed {}".format("RPLCD"))
-print('hi')
-print('testing...1, 2, 3.')
-
-
-print("Brendon wuz here")
-print("Jarod was also here")
-print("testing 2")
+# import curses
+# # from RPLCD import CharLCD
+#
+# # print("Successfully installed {}".format("RPLCD"))
+# print('hi')
+# print('testing...1, 2, 3.')
+#
+#
+# print("Brendon wuz here")
+# print("Jarod was also here")
+# print("testing 2")
 
 # ===============================================================
 # Brendon: Testing gpiozero library and Button module
@@ -103,7 +103,7 @@ import glob
 import time
 import os
 
-os.system ('modprobe w1-gpio')
+os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
 base_dir = '/sys/bus/w1/devices/'
@@ -155,26 +155,26 @@ frame.pack()
 
 root.geometry('800x400+350+300')
 root.title("python clock designing")
- 
+
 
 cframe =Frame(root, width=200, height=100, bg='green')
 cframe.pack(side= LEFT)
- 
+
 clock=Label(cframe, padx=200, pady=100, bd=3, fg= 'white',font=('arial',20,'bold'),text=cal ,bg='light green')
 clock.pack(side= LEFT )
 
 # bottomframe = Frame(root)
 # bottomframe.pack( side = BOTTOM )
-# 
+#
 # redbutton = Button(frame, text=cal, fg="red")
 # redbutton.pack( side =  RIGHT)
-# 
+#
 # greenbutton = Button(frame, text="Brown", fg="brown")
 # greenbutton.pack( side = LEFT )
-# 
+#
 # bluebutton = Button(frame, text="Blue", fg="blue")
 # bluebutton.pack( side = LEFT )
-# 
+#
 # blackbutton = Button(bottomframe, text="Black", fg="black")
 # blackbutton.pack( side = BOTTOM)
 
@@ -182,17 +182,17 @@ today = date.today()
 
 cframe3 =Frame(root, width=200, height=100, bg='green')
 cframe3.pack(side=BOTTOM)
- 
+
 clock3=Label(cframe, padx=200, pady=100, bd=3, fg= 'white',font=('arial',20,'bold'),text=today ,bg='light green')
 clock3.pack(side= BOTTOM )
 
 timenow=''
 c2frame =Frame(root, width=200, height=100)
 c2frame.pack(side = LEFT)
- 
+
 clock2=Label(cframe,padx=200, pady=200, bd=3, fg= 'white',font=('arial',48,'bold'),text= timenow,bg='black')
 clock2.pack(side = LEFT)
- 
+
 
 
 
@@ -204,7 +204,7 @@ def timer():
         clock2.config(text= timenow)
     clock2.after(200, timer)
 timer()
- 
- 
-mainloop()
 
+
+mainloop()
+#IO
